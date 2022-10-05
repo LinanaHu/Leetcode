@@ -1,0 +1,24 @@
+public class LC278 {
+    public int firstBadVersion(int n){
+        //corner case
+        if(n<=0) return n;
+        if (n == 1) return isBadVersion(n)? 1:0;
+
+
+        int left = 1, right = n;
+
+        while (left + 1 < right) {
+            int mid = left + (left - right)/2; //what if it is odd?
+            if (isBadVersion(mid)) {
+                right = mid;
+            }
+            else {
+                left = mid;
+
+            }
+        }
+
+        return isBadVersion(left)? left: right; //this is edge case where the first version is bad
+    }
+
+}
